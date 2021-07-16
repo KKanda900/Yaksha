@@ -7,10 +7,8 @@
 
 use whoami::username;
 use std::io;
-use std::io::stdin;
 use std::io::prelude::*;
 use std::env::current_dir;
-use std::fmt::Display;
 use walkdir::WalkDir;
 
 fn clear_screen(){
@@ -45,22 +43,40 @@ fn get_input() -> String{
     return line2;
 }
 
+// process input
+// take the full input then process the full first word -> command
+// take the second full input -> args for the command
 fn process_input(input: String, curr_directory: String) {
-    if input == "ls" {
+    
+    // parse the input
+    let split_input = input.split(" ");
+
+    
+
+    /* if input == "ls" {
         for entry in WalkDir::new(".").into_iter().filter_map(|e| e.ok()) {
             println!("{}", entry.path().display());
         }
-    }
+    } */
 }
 
+/* fn return_directory() -> std::io::Result<(), std::io::Error> {
+    let path = current_dir()?;
+    println!("The current directory is {}", path.display());
+    return path;
+} */
+
 // starts the main termainal program
-fn main(){
-    curr_directory = current_dir().unwrap().display();
+fn main() -> std::io::Result<()>{
     init_shell();
+    let path = current_dir()?;
     loop {
-        println!("Current Directory: {}>", curr_directory);
+        println!("The current directory is {}", path.display());
         let input = get_input(); // string input
-        process_input(input, curr_directory);
+        process_input(input, path.display().to_string());
         break;
     }
+    Ok(())
 }
+
+
