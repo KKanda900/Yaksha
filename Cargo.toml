@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 whoami = "1.1.2"
 walkdir = "2.3.2"
+tokenizers = "0.10.1"
